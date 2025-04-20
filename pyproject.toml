@@ -1,0 +1,78 @@
+[project]
+name = "gke-finops-dashboard"
+version = "0.1.0" # Reset version for GKE adaptation
+description = "A terminal-based GKE/GCP cost and resource dashboard." # Updated description
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [{name = "marvasgit"}, {name = "AI Assistant"}] # Added AI Assistant
+dependencies = [
+    "google-cloud-billing>=1.16.0", # Added GCP Billing API client
+    "google-cloud-billing-budgets>=1.14.0", # Added GCP Budgets API client
+    "google-cloud-container>=2.29.0", # Added GKE API client
+    "google-api-python-client>=2.130.0", # Added Google API client library
+    "google-auth>=2.29.0", # Added Google Auth library
+    "rich>=14.0.0", # Kept Rich for UI
+]
+keywords = ["gcp", "gke", "finops", "dashboard", "cli", "cloud", "cost", "billing"] # Updated keywords
+
+[project.urls]
+# TODO: Update these URLs if the project is hosted elsewhere
+"Homepage" = "https://github.com/marvasgit/gke-finops-dashboard"
+"Source" = "https://github.com/marvasgit/gke-finops-dashboard"
+
+[project.scripts]
+# Renamed script, module path will be updated later
+gke-finops = "gke_finops_dashboard.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "hatch>=1.9.0",
+    "mypy>=1.5.1",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.hatch.build.targets.wheel]
+# Package path will be updated later
+packages = ["gke_finops_dashboard"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build]
+# Package path will be updated later
+packages = ["gke_finops_dashboard"]
+
+# Custom scripts for development tasks
+[tool.hatch.envs.default]
+dependencies = [
+    "black>=23.12.1",
+    "isort>=5.13.2",
+    "mypy>=1.5.1",
+]
+
+[tool.hatch.envs.default.scripts]
+# Script paths will be updated later
+fmt = [
+    "isort gke_finops_dashboard",
+    "black gke_finops_dashboard",
+]
+lint = [
+    "black --check gke_finops_dashboard",
+    "isort --check gke_finops_dashboard",
+    "mypy gke_finops_dashboard",
+]
